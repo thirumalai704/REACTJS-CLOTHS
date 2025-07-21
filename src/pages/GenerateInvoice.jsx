@@ -1,0 +1,141 @@
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+function GenerateInvoice() {
+  const today = new Date();
+  const navigate = useNavigate();
+  const formattedDate = today.toISOString().split("T")[0];
+ const randomInvoice = Math.floor(Math.random() + 2004530000) + 16;
+  const [invoice,setInvoice] = useState(randomInvoice)
+  const { state: customer } = useLocation();
+  return (
+    <div className="p-4">
+      <h1 className="text-text font-medium text-xl mb-2">
+        Invoice Number : <span>{invoice}</span>
+      </h1>
+      <div className="flex justify-between">
+        <div className="flex-2">
+          <table className="table-auto w-full text-left ">
+            <tbody>
+              <tr>
+                <th className=" p-2 font-medium w-34">Company Name</th>
+                <td className=" p-2">{customer.customerName}</td>
+              </tr>
+              <tr>
+                <th className=" p-2 font-medium">Date of Dispatch</th>
+                <td className=" p-2">{formattedDate}</td>
+              </tr>
+              <tr>
+                <th className=" p-2 font-medium">Contact Number</th>
+                <td className=" p-2">+91 897879878</td>
+              </tr>
+              <tr>
+                <th className=" p-2 font-medium">Email ID</th>
+                <td className=" p-2">demoscompany@gmail.com</td>
+              </tr>
+              <tr>
+                <th className=" p-2 font-medium">Company Address</th>
+                <td className=" p-2">
+                  XYZ company, <br />
+                  chennai
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="flex-2">
+          <h1 className="text-xl font-semibold mb-4 text-text">
+            Customer Details
+          </h1>
+
+          <div className="mb-6 p-2">
+            <table className="table-auto w-full text-left ">
+              <tbody>
+                <tr>
+                  <th className=" p-2 font-medium w-34">Customer Name</th>
+                  <td className=" p-2">{customer.customerName}</td>
+                </tr>
+                <tr>
+                  <th className=" p-2 font-medium">Date of Order</th>
+                  <td className=" p-2">{customer.orderDate}</td>
+                </tr>
+                <tr>
+                  <th className=" p-2 font-medium">Contact Number</th>
+                  <td className=" p-2">{customer.phoneNo}</td>
+                </tr>
+                <tr>
+                  <th className=" p-2 font-medium">Email ID</th>
+                  <td className=" p-2">{customer.email || "Not provided"}</td>
+                </tr>
+                <tr>
+                  <th className=" p-2 font-medium">Billing Address</th>
+                  <td className=" p-2">{customer.shippingLocation}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* product details  */}
+      <div>
+        <h1 className="text-xl font-semibold mb-4 text-text">
+          Product Details
+        </h1>
+        <div className="mb-6   p-4">
+          <table className="table-auto w-full p-3">
+            <thead>
+              <tr className="border-b text-text">
+                <th className="px-4 py-5 text-left">S.No</th>
+                <th className="px-4 text-left">Product Code</th>
+                {/* <th className="px-4 text-left">Name</th> */}
+                {/* <th className="px-4 text-left">Location</th> */}
+                {/* <th className="px-4 text-left">Contact Number</th> */}
+                <th className="px-4 text-left">Category</th>
+                <th className="px-4 text-left">Sub Category</th>
+                <th className="px-4 text-left">Product Name</th>
+                <th className="px-4 text-left">Quntity</th>
+                <th className="px-4 text-left">Price</th>
+                {/* <th className="px-4 text-left">Staus</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+
+              //   className={`${idx !== customer.length - 1 ? "border-b" : ""} `}
+              >
+                <td className="px-4 py-3">{1}</td>
+                <td className="px-4">{customer.orderDate}</td>
+                {/* <td className="px-4">{customer.customerName}</td> */}
+                {/* <td className="px-4">{customer.shippingLocation}</td> */}
+                {/* <td className="px-4">{customer.phoneNo}</td> */}
+                <td className="px-4">{customer.category}</td>
+                <td className="px-4">{customer.subCategory}</td>
+                <td className="px-4">{customer.productName}</td>
+                <td className="px-4">{customer.quantity}</td>
+                <td className={"px-4"}>{customer.price}</td>
+
+                {/* <td className={`${customer.orderStatus=='Cancelled' ?"text-del" : "text-primary"} px-4 text-black`}>{customer.orderStatus}</td> */}
+              </tr>
+              {/* <tr className='w-full text-right'><h1>total :</h1></tr> */}
+            </tbody>
+          </table>
+          <h1>Total : {customer.price}</h1>
+        </div>
+
+        <div className="w-full">
+          <button
+            onClick={() => {
+              navigate("/DeliveryTracking", { state: customer , invoiceNo:invoice });
+            }}
+            className="text-right  font-medium text-white bg-primary px-3  "
+          >
+            Save Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default GenerateInvoice;

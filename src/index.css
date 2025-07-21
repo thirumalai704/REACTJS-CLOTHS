@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme{
+    --color-primary: #005226;
+    --color-text: #505050;
+    --color-bgclr: #FFFFFF;
+    --color-ligh: #BFFFEA33;
+    --color-del: #FF7272;
+
+    --font-abhaya:font-family: "Abhaya Libre", serif;
+}
+
+*{
+    font-family: "Roboto", sans-serif;
+    
+}
+
+body {
+  font-family: "Abhaya Libre", serif;
+}
